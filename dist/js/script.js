@@ -74,22 +74,13 @@
     }
     getElements() {
       const thisProduct = this;
-
-      thisProduct.accordionTrigger = thisProduct.element.querySelector(
-        select.menuProduct.clickable
-      );
-      thisProduct.form = thisProduct.element.querySelector(
-        select.menuProduct.form
-      );
-      thisProduct.formInputs = thisProduct.form.querySelectorAll(
-        select.all.formInputs
-      );
-      thisProduct.cartButton = thisProduct.element.querySelector(
-        select.menuProduct.cartButton
-      );
-      thisProduct.priceElem = thisProduct.element.querySelector(
-        select.menuProduct.priceElem
-      );
+      thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
+      thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
+      thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
+      thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
+      thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
     }
     initAccordion() {
       const thisProduct = this;
@@ -104,83 +95,64 @@
     }
     initOrderForm() {
       const thisProduct = this;
-      console.log(thisProduct);
-    }
-    processOrder() {
-      const thisProduct = this;
 
-      // covert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
-      const formData = utils.serializeFormToObject(thisProduct.form);
-      // console.log('formData', formData);
-      // set price to default price
-      let price = thisProduct.data.price;
-      // for every category (param)...
-      for (let paramId in thisProduct.data.params) {
-        // determine param value, e.g. paramId = 'toppings', param = { label: 'Toppings', type: 'checkboxes'... }
-        const param = thisProduct.data.params[paramId];
-        // console.log('param:', param);
-        // console.log('paramId:', paramId);
-
-        // for every option in this category
-        for (let optionId in param.options) {
-          
-          const option = param.options[optionId];
-
-          // ustalenie czy trzeba zwiększyć lub zmniejszyć cenę. Albo... nie robić z nią nic
-          
-          // if (formData.hasOwnProperty(paramId) == true && formData[paramId].includes(optionId) == true && option.default == true) {
-          //   console.log('opcja zaznaczona i domyślna to:', optionId, 'które jest w:', paramId, 'WIĘC NIE ZMIENIAMY CENY');
-          // } else if (formData[paramId].includes(optionId) == false && !option.default) {
-          //   console.log('opcja niezaznaczona i niedomyślna WIĘC NIE ZMIENIAMY CENY');
-          // }
-
-          // MOJA PROPOZYCJA, DZIALA ALE MOMENTAMI WOLNO
-          // if (formData.hasOwnProperty(paramId) == true && formData[paramId].includes(optionId) == true && !option.default) {
-          //   console.log('opcja zaznaczona, niedomyślna:', optionId, 'które jest w:', paramId, 'UWAGA PODNOSIMY CENĘ');
-          //   price += option.price;
-          // } else if (formData[paramId].includes(optionId) == false && option.default == true) {
-          //   console.log('opcja niezaznaczona, domyślna to:', optionId, 'które jest w:', paramId, 'UWAGA ZMNIEJSZAMY CENĘ');
-          //   price -= option.price;
-          // }
-
-          // PROPOZYCJA KODILLI, DZIAŁA I SZYBCIEJ
-          // check if there is param with a name of paramId in formData and if it includes optionId
-          if(formData[paramId] && formData[paramId].includes(optionId)) {
-            // check if the option is not default
-            if(!option.default) {
-              // add option price to price variable
-              price += option.price;
-            }
-          } else {
-            // check if the option is default
-            if(option.default) {
-              // reduce price variable
-              price -= option.price;
-            }
-          }
-
-        }
-      }
-      // update calculated price in the HTML
-      thisProduct.priceElem.innerHTML = price;
-
-      // nie wiem czy tu powinny byc te evenlistenery
       thisProduct.form.addEventListener('submit', function (event) {
         event.preventDefault();
         thisProduct.processOrder();
       });
-
+        
       for (let input of thisProduct.formInputs) {
         input.addEventListener('change', function () {
           thisProduct.processOrder();
         });
       }
-
+        
       thisProduct.cartButton.addEventListener('click', function (event) {
         event.preventDefault();
         thisProduct.processOrder();
       });
-      // console.log(this.processOrder);
+    }
+    processOrder() {
+      const thisProduct = this;
+      const formData = utils.serializeFormToObject(thisProduct.form);
+      let price = thisProduct.data.price;
+
+      for (let paramId in thisProduct.data.params) {
+        const param = thisProduct.data.params[paramId];
+
+        for (let optionId in param.options) {
+          const option = param.options[optionId];
+          
+          if(formData[paramId] && formData[paramId].includes(optionId)) {
+            if(!option.default) {
+              price += option.price;
+            }
+          } else {
+            if(option.default) {
+              price -= option.price;
+            }
+          }
+
+          const optionImage = thisProduct.imageWrapper.querySelector(`.${paramId}-${optionId}`);
+
+          if(optionImage) {
+            if (formData[paramId] && formData[paramId].includes(optionId)) {
+              optionImage.classList.add('active');
+            } else {
+              optionImage.classList.remove('active');
+            }
+          }
+        }
+      }
+      thisProduct.priceElem.innerHTML = price;
+    }
+  }
+
+  class AmountWidget {
+    constructor(element){
+      const thisWidget = this;
+      console.log('AmountWidget:', AmountWidget);
+      console.log('constructor arguments:', element);
     }
   }
 
@@ -207,6 +179,5 @@
       thisApp.initMenu();
     },
   };
-
   app.init();
 }
