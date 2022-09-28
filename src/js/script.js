@@ -2,10 +2,6 @@
 
 {
   ('use strict');
-  //LINIJKA 110 - JAK TO ZROBIC? 
-  //Tak, żeby wszystkie referencje do elementów DOM były "schowane" w dodatkowym obiekcie thisProduct.dom.
-  //u mnie w koszyku, w przeciwienstwie do podanego wzoru zmienia sie cena pojedynczego produktu
-  //i nie zgadza sie z iloscia jesli przed dodaniem do koszyka wybiore wiecej niz 1 sztuke tego samego produktu
   const select = {
     templateOf: {
       menuProduct: '#template-menu-product',
@@ -116,9 +112,6 @@
     }
     getElements() {
       const thisProduct = this;
-      // thisProduct.dom = {
-      //   accordionTrigger: thisProduct.element.querySelector(select.menuProduct.clickable)
-      // }
       
       thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
       thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
@@ -266,7 +259,7 @@
     constructor(element){
       const thisWidget = this;
       thisWidget.getElements(element);
-      thisWidget.setValue(settings.amountWidget.defaultValue);
+      thisWidget.setValue(thisWidget.input.value || settings.amountWidget.defaultValue);
       thisWidget.initActions();
     }
 
@@ -347,7 +340,7 @@
       const thisCart = this;
       thisCart.dom.toggleTrigger.addEventListener('click', () => thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive));
       thisCart.dom.productList.addEventListener('updated', () => thisCart.update());
-      thisCart.dom.productList.addEventListener('remove', () => thisCart.remove(event.detail.cartProduct));
+      thisCart.dom.productList.addEventListener('remove', (event) => thisCart.remove(event.detail.cartProduct));
       thisCart.dom.form.addEventListener('submit', function (event) {
         event.preventDefault();
         thisCart.sendOrder();
@@ -365,7 +358,6 @@
       thisCart.update();
     }
     
-    // SUMOWANIE KOSZYKA
     update() {
       const thisCart = this;
 
@@ -379,9 +371,10 @@
       }
 
       if (thisCart.totalNumber !== 0) {
-        thisCart.totalPrice = thisCart.subtotalPrice +  thisCart.deliveryFee;
+        thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
       } else {
         thisCart.totalPrice = 0;
+        thisCart.deliveryFee = 0;
       }
      
       thisCart.dom.deliveryFee.innerHTML =  thisCart.deliveryFee;
@@ -393,10 +386,10 @@
       console.log('thisCart.products', thisCart.products);
     }
 
-    remove(cartProduct) { //skąd wiemy że małe "c"
+    remove(cartProduct) { 
       const thisCart = this;
    
-      cartProduct.dom.wrapper.remove(); //skąd ten selektor?
+      cartProduct.dom.wrapper.remove();
 
       const indexOfCartProduct = thisCart.products.indexOf(CartProduct);
       thisCart.products.splice(indexOfCartProduct, 1);
@@ -435,8 +428,17 @@
           return response.json();
         }) .then(function(parsedResponse){
           console.log('parsedResponse', parsedResponse);
+          thisCart.removeAll();
         });
    
+    }
+
+    removeAll() {
+      const thisCart = this;
+
+      thisCart.dom.productList.innerHTML = '';
+      thisCart.products.splice(0, thisCart.products.length);
+      thisCart.update();
     }
   }
 

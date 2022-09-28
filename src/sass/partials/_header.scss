@@ -2,6 +2,9 @@
   padding: ($base-size * 5) 0;
   background: $color-dark;
   color: $color-light;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
 
   &__wrapper {
     position: relative;
