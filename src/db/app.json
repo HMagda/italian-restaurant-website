@@ -203,16 +203,16 @@
        }
     ],
     "orders":[],
-    "events": [
+    "event": [
       {
         "id": 1,
-        "date": "2021-01-01",
-        "hour": "12:30",
+        "date": "2022-10-07",
+        "hour": "13:30",
         "table": 1,
         "repeat": false,
         "duration": 4,
         "ppl": 3,
-        "starters": []
+        "starters": ["bread"]
       },
       {
         "id": 2,
@@ -255,5 +255,16 @@
         "starters": ["lemonWater"]
       }
     ],
-    "bookings": []
+    "booking": [
+      {
+         "id": 4,
+         "date": "2022-10-08",
+         "hour": "22:00",
+         "table": 2,
+         "repeat": "daily",
+         "duration": 4,
+         "ppl": 3,
+         "starters": []
+       }
+    ]
  }
