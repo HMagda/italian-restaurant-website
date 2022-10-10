@@ -203,7 +203,7 @@
        }
     ],
     "orders":[],
-    "event": [
+    "events": [
       {
         "id": 1,
         "date": "2022-10-07",
@@ -255,7 +255,7 @@
         "starters": ["lemonWater"]
       }
     ],
-    "booking": [
+    "bookings": [
       {
          "id": 4,
          "date": "2022-10-08",

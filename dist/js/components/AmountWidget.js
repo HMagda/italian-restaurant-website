@@ -9,7 +9,7 @@ class AmountWidget extends BaseWidget{
     const thisWidget = this;
 
     thisWidget.getElements(element);
-    // thisWidget.setValue(thisWidget.input.value || settings.amountWidget.defaultValue);
+    thisWidget.setValue(thisWidget.dom.input.value || settings.amountWidget.defaultValue);
     thisWidget.initActions();
   }
 
