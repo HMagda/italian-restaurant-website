@@ -1,0 +1,187 @@
+.home-widget {
+  transform: opacity 500ms;
+  font-family: $font-header;
+
+  &.loading {
+    opacity: 0.25;
+  }
+}
+
+.home-wrapper {
+  margin: ($base-size * 3.5) auto;
+  padding: ($base-size * 6) ($base-size * 4);
+  background: $color-light;
+  border-bottom: 1px solid lighten($color-dark, 70%);
+  border-radius: $radius;
+}
+
+.starter {
+  display: flex;
+}
+
+.starter-photo {
+  position: relative;
+  width: 299px;
+  height: 119px;
+  border: solid 5px $color-light;
+  z-index: 5;
+  object-fit: cover;
+}
+
+.starter-text {
+  position: absolute;
+  z-index: 10;
+  text-align: center;
+  transition-duration: 1s;
+
+  a {
+    text-decoration: none;
+  }
+
+  h2 {
+    font-size: 26px;
+    color: $color-light;
+  }
+
+  p {
+    font-size: 14px;
+    font-family: $font-text;
+    opacity: 0;
+    color: $color-light;
+    margin: 0 25px;
+  }
+
+  &:hover {
+    margin-top: -20px;
+
+    p {
+      opacity: 1;
+    }
+  }
+}
+
+.open-hours {
+  margin-top: -25px;
+  text-align: center;
+  background: #ff6b6b;
+  color: $color-light;
+  width: 604px;
+  height: 120px;
+
+  h3 {
+    font-size: 26px;
+    margin-bottom: -10px;
+    padding-top: 15px;
+  }
+
+  p {
+    font-family: $font-text;
+    font-size: 14px;
+  }
+}
+
+//carousel
+
+[class^="opinion-"] {
+  position: relative;
+}
+
+.opinion {
+  margin: 100px 0;
+
+  .opinion-image {
+    position: absolute;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .opinion-image img {
+    width: 193px;
+    height: 193px;
+    object-fit: cover;
+  }
+
+  .opinion-description {
+    padding: 10px 0 10px 36%;
+    text-align: left;
+    font-family: $font-text;
+
+    .opinion-author {
+      font-style: italic;
+    }
+  }
+}
+
+.carousel-cell {
+  width: 100%; /* full width */
+  height: 340px; /* height of carousel */
+}
+
+.gallery {
+  display: block;
+  position: relative;
+  margin: 100px auto;
+
+  .gallery-flex {
+    display: flex;
+  }
+
+  .icons {
+    position: absolute;
+    font-size: 30px;
+    margin: 66px;
+
+    a {
+      text-decoration: none;
+    }
+
+    .fa-share-alt {
+      color: $color-light;
+    }
+
+    .fa-heart {
+      color: #e55039;
+    }
+  }
+
+  img {
+    width: 193px;
+    height: 193px;
+    object-fit: cover;
+    margin: 5px;
+  }
+}
+
+.image {
+  display: block;
+  transition: $transition;
+
+  .fas {
+    opacity: 0;
+  }
+
+  &:hover {
+    filter: brightness(70%);
+
+    .fas {
+      opacity: 0.7;
+
+      &:hover {
+        opacity: 1.5;
+      }
+    }
+  }
+}
+
+footer {
+  a {
+    text-decoration: none;
+  }
+
+  .footer {
+    font-family: $font-text;
+    font-size: 14px;
+    color: #ff6b6b;
+    text-decoration: underline;
+  }
+}

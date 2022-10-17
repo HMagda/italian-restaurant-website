@@ -15,6 +15,7 @@ class Product {
     thisProduct.processOrder();
     thisProduct.prepareCartProduct();
   }
+
   renderInMenu() {
     const thisProduct = this;
     const generatedHTML = templates.menuProduct(thisProduct.data);
@@ -22,6 +23,7 @@ class Product {
     const menuContainer = document.querySelector(select.containerOf.menu);
     menuContainer.appendChild(thisProduct.element);
   }
+
   getElements() {
     const thisProduct = this;
       
@@ -33,6 +35,7 @@ class Product {
     thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
   }
+
   initAccordion() {
     const thisProduct = this;
     thisProduct.accordionTrigger.addEventListener('click', function (event) {
@@ -44,6 +47,7 @@ class Product {
       thisProduct.element.classList.toggle('active');
     });
   }
+
   initOrderForm() {
     const thisProduct = this;
 
@@ -64,6 +68,7 @@ class Product {
       thisProduct.addToCart();
     });
   }
+
   processOrder() {
     const thisProduct = this;
     const formData = utils.serializeFormToObject(thisProduct.form);
@@ -103,6 +108,7 @@ class Product {
     price *= thisProduct.amountWidget.value;
     thisProduct.priceElem.innerHTML = price;
   }
+  
   initAmountWidget() {
     const thisProduct = this;
     thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
@@ -114,7 +120,6 @@ class Product {
   addToCart() {
     const thisProduct = this;
 
-    // app.cart.add(thisProduct.prepareCartProduct());
     const event = new CustomEvent('add-to-cart', {
       bubbles: true,
       detail: {

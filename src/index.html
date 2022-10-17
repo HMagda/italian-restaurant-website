@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=Lato:400,300i,700%7COswald:300,500,700&amp;subset=latin-ext" rel="stylesheet">
   <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
   <link rel="stylesheet" href="vendor/range-slider.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -74,9 +75,153 @@
     </section>
   </div>
 
+  <script id="template-home-widget" type="text/x-handlebars-template">
+    <div class="home-widget">
+      <div class="starter">
+        <div class="order-online">
+          <div class="starter-text">
+            <a href="#order">
+              <h2>ORDER ONLINE</h2>
+              <p class="hover-text">Delicious food delivered to your door</p>
+            </a>
+          </div>
+          <img class="starter-photo" src="images/assets/pizza-1.jpg">
+        </div>
+        <div class="book-table">
+          <div class="starter-text">
+            <a href="#booking">
+              <h2>Book a Table</h2>
+              <p>Book your place and get DISSCOUNT</p>
+            </a>
+          </div>
+          <img class="starter-photo" src="images/assets/pizza-2.jpg">
+        </div>
+      </div>
+      <div class="open-hours">
+        <h3>OPENING HOURS:</h3>
+        <p>TUE-SUN, 12PM - 12AM</p>
+      </div>
+      <div class="opinions">
+        <div class="carousel">
+          <div class="carousel-cell">
+            <div class="opinion">
+              <div class="opinion-image">
+                <img src="images/assets/pizza-3.jpg">
+              </div>
+              <div class="opinion-description">
+                <h3 class="opinion-tittle">Best Service</h3>
+                <p class="opinion-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam egestas viverra tortor, eu ullamcorper dui imperdiet nec. Nunc sed dolor at elit lobortis sodales.</p>
+                <p class="opinion-author">- Margaret Osborne</p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-cell">
+            <div class="opinion">
+              <div class="opinion-image">
+                <img src="images/assets/pizza-3.jpg">
+              </div>
+              <div class="opinion-description">
+                <h3 class="opinion-tittle">Good Snack</h3>
+                <p class="opinion-text">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+                <p class="opinion-author">- Richard McClintock</p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-cell">
+            <div class="opinion">
+              <div class="opinion-image">
+                <img src="images/assets/pizza-3.jpg">
+              </div>
+              <div class="opinion-description">
+                <h3 class="opinion-tittle">Great venue</h3>
+                <p class="opinion-text">All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
+                <p class="opinion-author">- Arthur Robson</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="gallery">
+        <div class="gallery-flex">
+          <div class="image">
+            <div class="icons">
+              <a href="#love">
+                <i class="fas fa-heart"></i>
+              </a>
+              <a href="#share">
+                <i class="fas fa-share-alt"></i>
+              </a>
+            </div>
+            <img src="images/assets/pizza-4.jpg">
+          </div>
+          <div class="image">
+            <div class="icons">
+              <a href="#love">
+                <i class="fas fa-heart"></i>
+              </a>
+              <a href="#share">
+                <i class="fas fa-share-alt"></i>
+              </a>
+            </div class="image">
+            <img src="images/assets/pizza-5.jpg">
+          </div>
+          <div class="image">
+            <div class="icons">
+              <a href="#love">
+                <i class="fas fa-heart"></i>
+              </a>
+              <a href="#share">
+                <i class="fas fa-share-alt"></i>
+              </a>
+            </div>
+            <img src="images/assets/pizza-6.jpg">
+          </div>
+        </div>
+        <div class="gallery-flex">
+          <div class="image">
+            <div class="icons">
+              <a href="#love">
+                <i class="fas fa-heart"></i>
+              </a>
+              <a href="#share">
+                <i class="fas fa-share-alt"></i>
+              </a>
+            </div>
+            <img src="images/assets/pizza-7.jpg">
+          </div>
+          <div class="image">
+            <div class="icons">
+              <a href="#love">
+                <i class="fas fa-heart"></i>
+              </a>
+              <a href="#share">
+                <i class="fas fa-share-alt"></i>
+              </a>
+            </div>
+            <img src="images/assets/pizza-8.jpg">
+          </div>
+          <div class="image">
+            <div class="icons">
+              <a href="#love">
+                <i class="fas fa-heart"></i>
+              </a>
+              <a href="#share">
+                <i class="fas fa-share-alt"></i>
+              </a>
+            </div>
+            <img src="images/assets/pizza-9.jpg">
+          </div>
+        </div>
+      </div>
+      <footer>
+        <a href="#instagram"><p class="footer">Viev more on Instagram</p></a>
+      </footer>
+    </div>
+  </script>
+
   <script id="template-cart-product" type="text/x-handlebars-template">
     <li>
-      <div class="widget-amount"> <!-- widget-amount -->
+      <div class="widget-amount">
         <a class="btn-quantity btn-quantity--lt" href="#less"><i class="fas fa-minus"></i></a>
         <input class="amount" type="text" value="{{ amount }}">
         <a class="btn-quantity btn-quantity--lt" href="#more"><i class="fas fa-plus"></i></a>
@@ -103,24 +248,23 @@
   </script>
 
   <script id="template-menu-product" type="text/x-handlebars-template">
-    <article class="product"> <!-- product -->
-
+    <article class="product">
         <header class="product__header">
           <h3 class="product__name no-spacing">{{ name }} <i class="fas fa-chevron-down product__icon"></i></h3>
           <p class="product__base-price no-spacing">${{ price }}</p>
         </header>
-        <div class="product__description"> <!-- description -->
+        <div class="product__description">
           <p>{{{ description }}}</p>
-        </div> <!-- .description -->
-        <div class="product__wrapper"> <!-- details -->
+        </div>
+        <div class="product__wrapper">
           <form class="product__order">
-            <ul class="product__params"> <!-- params -->
+            <ul class="product__params">
               {{#each params as |param paramId| }}
               {{#ifEquals type "checkboxes"}}
-              <li> <!-- checkboxes -->
+              <li> 
                 <h3 class="product__params-title">{{{ label }}}</h3>
                 {{#each options}}
-                <div class="checkbox"> <!-- checkbox -->
+                <div class="checkbox">
                   <label>
                     <input type="checkbox" name="{{ paramId }}" value="{{ @key }}" id="{{ @key }}" {{#if default}}checked{{/if}}>
                     <span class="checkbox__checkmark"></span>
@@ -131,10 +275,10 @@
               </li>
               {{/ifEquals}}
               {{#ifEquals type "radios"}}
-              <li> <!-- radios -->
+              <li>
                 <h3 class="product__params-title">{{{ label }}}</h3>
                 {{#each options}}
-                <div class="checkbox checkbox--round"> <!-- radio -->
+                <div class="checkbox checkbox--round">
                   <label>
                     {{{ label }}} (${{{ price }}})
                     <input type="radio" name="{{ paramId }}" value="{{ @key }}" id="{{ @key }}" {{#if default}}checked{{/if}}>
@@ -145,7 +289,7 @@
               </li>
               {{/ifEquals}}
               {{#ifEquals type "select"}}
-              <li> <!-- select -->
+              <li>
                 <h3 class="product__params-title">{{{ label }}}</h3>
                 <select name="{{ paramId }}">
                   {{#each options}}
@@ -156,8 +300,8 @@
               {{/ifEquals}}
               {{/each}}
             </ul>
-            <div class="amount"> <!-- controls -->
-              <div class="widget-amount"> <!-- widget-amount -->
+            <div class="amount">
+              <div class="widget-amount">
                 <h3 class="product__params-title">Select quantity</h3>
                 <a class="btn-quantity" href="#less"><i class="fas fa-minus"></i></a>
                 <input class="amount" type="text">
@@ -166,19 +310,18 @@
               <p class="product__total-price">
                 Total: $<span class="price">{{{ price }}}</span>
               </p>
-              <div> <!-- add-to-cart -->
+              <div>
                 <a class="btn-primary" href="#add-to-cart">Add to cart</a>
               </div>
             </div>
           </form>
-          <div class="product__images {{ class }}"> <!-- images -->
+          <div class="product__images {{ class }}">
             {{#each images}}
             {{{ this }}}
             {{/each}}
           </div>
         </div>
-
-    </article> <!-- .product -->
+    </article> 
   </script>
 
   <script id="template-booking-widget" type="text/x-handlebars-template">
@@ -203,33 +346,33 @@
           <div class="object table table--round" data-table="2">table-2</div>
           <div class="object table" data-table="3">table-3</div>
         </div>
-        <div class="booking-options"> <!-- options -->
-          <label class="booking-option-title"> <!-- option-row -->
+        <div class="booking-options">
+          <label class="booking-option-title">
             People
-            <div class="widget-amount people-amount"> <!-- widget-amount -->
+            <div class="widget-amount people-amount">
               <a class="btn-quantity" href="#less"><i class="fas fa-minus"></i></a>
               <input class="amount" type="text" name="people" value="1">
               <a class="btn-quantity" href="#more"><i class="fas fa-plus"></i></a>
             </div>
           </label>
-          <label class="booking-option-title"> <!-- option-row -->
+          <label class="booking-option-title">
             Hours
-            <div class="widget-amount hours-amount"> <!-- widget-amount -->
+            <div class="widget-amount hours-amount">
               <a class="btn-quantity" href="#less"><i class="fas fa-minus"></i></a>
               <input class="amount" type="text" name="hours" value="1">
               <a class="btn-quantity" href="#more"><i class="fas fa-plus"></i></a>
             </div>
           </label>
-          <div> <!-- option-row -->
+          <div>
             <span class="booking-option-title">Starters</span>
-            <div class="checkbox"> <!-- checkbox -->
+            <div class="checkbox">
               <label>
                 <input type="checkbox" name="starter" value="water">
                 <span class="checkbox__checkmark"></span>
                 Water
               </label>
             </div>
-            <div class="checkbox"> <!-- checkbox -->
+            <div class="checkbox">
               <label>
                 <input type="checkbox" name="starter" value="bread">
                 <span class="checkbox__checkmark"></span>
@@ -250,6 +393,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="vendor/range-slider.min.js"></script>
+  <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
   <script type="module" src="js/app.js"></script>
 
 </body>

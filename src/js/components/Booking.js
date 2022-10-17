@@ -189,6 +189,7 @@ class Booking {
     thisBooking.dom.address = element.querySelector(select.booking.address);
     thisBooking.dom.phone = element.querySelector(select.booking.phone);
     thisBooking.dom.starters = element.querySelectorAll(select.booking.starters);
+    thisBooking.dom.form = element.querySelector(select.booking.form);
   }
 
   initWidgets(){
@@ -206,40 +207,34 @@ class Booking {
 
     thisBooking.dom.tablesContainer.addEventListener('click', function(event){
       thisBooking.initTables(event.target);
+    });
+
+    thisBooking.dom.form.addEventListener('submit', function(event){
+      event.preventDefault();
       thisBooking.sendBooking();
     });
+
   }
 
   sendBooking() {
+
     const thisBooking = this;
+
+    if (!thisBooking.selected) {
+      alert('Wybierz stolik!');
+    }
 
     const url = settings.db.url + '/' + settings.db.bookings;
     console.log(url);
 
     const payload = {
-      // "date": data wybrana w datePickerze
       date: thisBooking.datePicker.value,
-
-      // "hour": godzina wybrana w hourPickerze (w formacie HH:ss)
       hour: thisBooking.hourPicker.value,
-
-      // "table": numer wybranego stolika (lub null jeśli nic nie wybrano)
-      //- jak nie wybierze stolika to nic sie nie zapisuje
-      // table: thisBooking.tables.id,
-
-      // "duration": liczba godzin wybrana przez klienta
+      table: thisBooking.selected,
       duration: thisBooking.hoursAmount.value,
-
-      // "ppl": liczba osób wybrana przez klienta
       ppl: thisBooking.peopleAmount.value,
-
-      // "starters": [],
       starters: [],
-
-      // "phone": numer telefonu z formularza,
       phone: thisBooking.dom.phone.value,
-
-      // "address": adres z formularza
       address: thisBooking.dom.address.value
     };
 
@@ -250,6 +245,8 @@ class Booking {
         payload.starters.push(starter.value);
       }
     }
+
+    fetch(url, {method: 'POST', body: JSON.stringify(payload), headers: {'Content-Type': 'application/json'}});
   }
 }
 
