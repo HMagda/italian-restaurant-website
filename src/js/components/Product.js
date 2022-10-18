@@ -166,7 +166,6 @@ class Product {
         if(formData[paramId] && formData[paramId].includes(optionId)) {
             
           productParams[paramId].options[optionId] = option.label;
-            
         } 
       }
     }
