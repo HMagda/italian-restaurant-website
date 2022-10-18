@@ -53,7 +53,7 @@ export const select = {
     form: '.booking-form',
   },
   nav: {
-    links: '.main-nav a',
+    links: '.main-nav a, .starter-text a',
   },
   cart: {
     productList: '.cart__order-summary',

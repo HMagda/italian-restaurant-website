@@ -74,8 +74,6 @@ class Cart {
     thisCart.dom.totalPrice[0].innerHTML = thisCart.totalPrice;
     thisCart.dom.totalPrice[1].innerHTML = thisCart.totalPrice;
     thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
-
-    console.log('thisCart.products', thisCart.products);
   }
 
   remove(cartProduct) { 
