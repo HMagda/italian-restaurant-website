@@ -1,4 +1,4 @@
-# Pizzeria
+# Italian restaurant
 
 A desktop app for Italian restaurant.
 
