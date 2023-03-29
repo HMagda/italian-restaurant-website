@@ -179,7 +179,7 @@
 
       &::after {
         position: absolute;
-        content: "";
+        content: '';
         width: 100%;
         height: 100%;
         left: 0;
@@ -194,7 +194,7 @@
 
       &::after {
         position: absolute;
-        content: "";
+        content: '';
         width: 100%;
         height: 100%;
         left: 0;
@@ -204,15 +204,14 @@
         opacity: 0.4;
       }
     }
-
   }
 
-  [data-table="1"] {
+  [data-table='1'] {
     left: 40px;
     top: 40px;
   }
 
-  [data-table="2"] {
+  [data-table='2'] {
     right: 25px;
     top: 25px;
     width: 100px;
@@ -220,7 +219,7 @@
     line-height: 100px;
   }
 
-  [data-table="3"] {
+  [data-table='3'] {
     right: 40px;
     top: 180px;
   }

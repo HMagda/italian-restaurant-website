@@ -13,7 +13,6 @@ class Cart {
   getElements(element) {
     const thisCart = this;
     thisCart.dom = {};
-     
     thisCart.dom.wrapper = element;
     thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
     thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
@@ -21,18 +20,22 @@ class Cart {
     thisCart.dom.subtotalPrice = thisCart.dom.wrapper.querySelector(select.cart.subtotalPrice);
     thisCart.dom.totalPrice = thisCart.dom.wrapper.querySelectorAll(select.cart.totalPrice);
     thisCart.dom.totalNumber = thisCart.dom.wrapper.querySelector(select.cart.totalNumber);
-
     thisCart.dom.form = thisCart.dom.wrapper.querySelector(select.cart.form);
     thisCart.dom.address = thisCart.dom.wrapper.querySelector(select.cart.address);
     thisCart.dom.phone = thisCart.dom.wrapper.querySelector(select.cart.phone);
-      
   }
 
   initActions() {
     const thisCart = this;
-    thisCart.dom.toggleTrigger.addEventListener('click', () => thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive));
-    thisCart.dom.productList.addEventListener('updated', () => thisCart.update());
-    thisCart.dom.productList.addEventListener('remove', (event) => thisCart.remove(event.detail.cartProduct));
+    thisCart.dom.toggleTrigger.addEventListener('click', () =>
+      thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive)
+    );
+    thisCart.dom.productList.addEventListener('updated', () =>
+      thisCart.update()
+    );
+    thisCart.dom.productList.addEventListener('remove', (event) =>
+      thisCart.remove(event.detail.cartProduct)
+    );
     thisCart.dom.form.addEventListener('submit', function (event) {
       event.preventDefault();
       thisCart.sendOrder();
@@ -41,15 +44,15 @@ class Cart {
 
   add(menuProduct) {
     const thisCart = this;
-        
+
     const generatedHTML = templates.cartProduct(menuProduct);
     const generatedDOM = utils.createDOMFromHTML(generatedHTML);
     thisCart.dom.productList.appendChild(generatedDOM);
-      
+
     thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
     thisCart.update();
   }
-    
+
   update() {
     const thisCart = this;
 
@@ -59,7 +62,7 @@ class Cart {
 
     for (let CartProduct of thisCart.products) {
       thisCart.totalNumber += CartProduct.amount;
-      thisCart.subtotalPrice +=  CartProduct.price;
+      thisCart.subtotalPrice += CartProduct.price;
     }
 
     if (thisCart.totalNumber !== 0) {
@@ -68,22 +71,22 @@ class Cart {
       thisCart.totalPrice = 0;
       thisCart.deliveryFee = 0;
     }
-     
-    thisCart.dom.deliveryFee.innerHTML =  thisCart.deliveryFee;
+
+    thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
     thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
     thisCart.dom.totalPrice[0].innerHTML = thisCart.totalPrice;
     thisCart.dom.totalPrice[1].innerHTML = thisCart.totalPrice;
     thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
   }
 
-  remove(cartProduct) { 
+  remove(cartProduct) {
     const thisCart = this;
-   
+
     cartProduct.dom.wrapper.remove();
 
     const indexOfCartProduct = thisCart.products.indexOf(CartProduct);
     thisCart.products.splice(indexOfCartProduct, 1);
-      
+
     thisCart.update();
   }
 
@@ -99,9 +102,9 @@ class Cart {
       subtotalPrice: thisCart.subtotalPrice,
       totalNumber: thisCart.totalNumber,
       deliveryFee: thisCart.deliveryFee,
-      products: []
+      products: [],
     };
-    for(let prod of thisCart.products) {
+    for (let prod of thisCart.products) {
       payload.products.push(prod.getData());
     }
 
@@ -112,15 +115,15 @@ class Cart {
       },
       body: JSON.stringify(payload),
     };
-      
+
     fetch(url, options)
-      .then(function(response){
+      .then(function (response) {
         return response.json();
-      }) .then(function(parsedResponse){
+      })
+      .then(function (parsedResponse) {
         console.log('parsedResponse', parsedResponse);
         thisCart.removeAll();
       });
-   
   }
 
   removeAll() {

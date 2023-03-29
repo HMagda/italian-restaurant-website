@@ -1,5 +1,3 @@
-/* Variables */
-
 $color-dark: #333;
 $color-light: #fff;
 $color-main: #ff6b6b;
@@ -17,12 +15,10 @@ $font-normal: 400;
 $font-semibold: 500;
 $font-bold: 700;
 
-$transition: all .3s;
+$transition: all 0.3s;
 $radius: 4px;
 
 $base-size: 12px;
-
-/* Mixins */
 
 @mixin btn($btn-bg, $btn-text, $btn-border) {
   background: $btn-bg;
@@ -42,13 +38,12 @@ $base-size: 12px;
     background: lighten($btn-bg, 3%);
   }
 
-  // CODE ADDED START
-  &.disabled, &[disabled] {
+  &.disabled,
+  &[disabled] {
     background: desaturate($btn-bg, 100%);
     border-color: desaturate($btn-border, 100%);
     cursor: not-allowed;
   }
-  // CODE ADDED END
 }
 
 @mixin flex($flex-direction, $align-items, $justify-content) {
@@ -78,8 +73,6 @@ $base-size: 12px;
   max-height: 1000px;
   opacity: 1;
 }
-
-/* Helpers */
 
 .no-spacing {
   margin: 0;
