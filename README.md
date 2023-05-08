@@ -1,6 +1,8 @@
 # Italian restaurant
 
-A desktop app for Italian restaurant.
+This desktop app for Italian restaurant allows you to customize your meal by easily selecting from a wide range of ingredients to create the perfect dish that suits your taste. With the **real-time visualization feature**, you can see every ingredient you add, ensuring you know exactly what you're getting. Stay on top of your budget with the **automatic pricing system** that calculates the cost of your meal as you make your selections.
+
+The **seamless ordering process** includes clear delivery costs that are automatically added to your cart summary. Additionally, this JavaScript app simplifies table booking with a user-friendly interface, enabling you to reserve a table for your preferred date, time, and number of people. To top it off, the **smart table selection** feature allows you to choose your ideal spot in the restaurant by selecting from an interactive plan with reserved and occupied tables clearly marked. Experience a whole new level of dining with this one-of-a-kind platform!
 
 # Getting Started
 
